@@ -9,9 +9,10 @@ target_sources(
     ${target}
     PRIVATE
     main.cpp
+    src/test.cpp
 )
 
-target_include_directories(${target} PRIVATE inc/)
+target_include_directories(${target} PRIVATE include/)
 
 target_compile_features(${target} PRIVATE cxx_std_20)
 set_target_properties(${target} PROPERTIES CXX_EXTENSIONS OFF)
