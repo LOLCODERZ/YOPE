@@ -10,8 +10,7 @@ target_sources(
     PRIVATE
     main.cpp
     src/test.cpp
-        token.cpp
-        token.h
+        src/token.cpp
 )
 
 target_include_directories(${target} PRIVATE include/)
