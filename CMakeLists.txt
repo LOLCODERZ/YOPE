@@ -12,6 +12,7 @@ target_sources(
     src/test.cpp
     src/token.cpp
     src/parser.cpp
+    src/lexer.cpp
 )
 
 target_include_directories(${target} PRIVATE include/)
