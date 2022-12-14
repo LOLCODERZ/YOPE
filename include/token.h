@@ -83,7 +83,7 @@ enum TokenKeywordT{
     TOKEN_KEYWORD_R,
     TOKEN_KEYWORD_Z,
     TOKEN_KEYWORD_IT,
-    TOKEN_KEYWORD_MEBEE,
+    TOKEN_KEYWORD_MEBEE
 };
 
 class IToken{
@@ -108,7 +108,7 @@ class TokenSymbol: public IToken{
 public:
     TokenSymbolT m_symbol;
 
-    TokenSymbol(TokenType symbol);
+    TokenSymbol(TokenSymbolT symbol);
 
     std::string to_string() override;
 };
