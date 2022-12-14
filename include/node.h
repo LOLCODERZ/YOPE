@@ -73,7 +73,7 @@ public:
 
 class UnOpNode : public INode {
 public:
-    UnOpNode(std::shared_ptr<INode> lhs, OpType);
+    UnOpNode(std::shared_ptr<INode> lhs, OpType op);
     std::string to_string() override;
 
     std::shared_ptr<INode> m_lhs;
@@ -85,32 +85,32 @@ public:
     IfNode(std::shared_ptr<INode> );
     std::string to_string() override;
 
-
+    std::shared_ptr<INode> m_condition;
 };
 
 class FunDefNode : public INode {
 public:
-    FunDefNode();
+    FunDefNode(std::string name, ValueType return_type, std::vector<std::shared_ptr<INode>> params, std::shared_ptr<INode> body);
     std::string to_string() override;
 
     std::string m_name;
     ValueType m_return_type;
-    std::vector<std::shared_ptr<INode> > m_params;
-    std::vector<INode> m_body;
+    std::vector<std::shared_ptr<INode>> m_params;
+    std::vector<std::shared_ptr<INode>> m_body;
 };
 
 class FunCallNode : public INode {
 public:
-    FunCallNode();
+    FunCallNode(std::string name, std::vector<std::shared_ptr<INode>> params);
     std::string to_string() override;
 
     std::string m_name;
-    std::shared_ptr<std::shared_ptr<INode>> m_params;
+    std::vector<std::shared_ptr<INode>> m_params;
 };
 
 class VarDefNode : public INode {
 public:
-    VarDefNode();
+    VarDefNode(ValueType type, std::string name, std::shared_ptr<INode> value);
     std::string to_string() override;
 
     ValueType m_type;
@@ -148,7 +148,7 @@ class WhileLoopNode : public INode {
 
 class IncludeNode : public INode {
     IncludeNode();
-    std::string to_string() override;;
+    std::string to_string() override;
 
     std::string m_path;
 };
@@ -166,11 +166,13 @@ class ReturnNode : public INode {
 };
 
 class InterruptNode : public INode {
-
+    InterruptNode();
+    std::string to_string() override;
 };
 
 class SwitchNode : public INode {
-
+    SwitchNode();
+    std::string to_string() override;
 };
 
 
