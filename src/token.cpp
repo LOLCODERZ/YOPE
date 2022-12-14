@@ -4,7 +4,7 @@
 IToken::IToken(TokenType type): m_type(type) {}
 
 //Token Identifier
-TokenIdentifier::TokenIdentifier(std::string &value): IToken(TokenType::TOKEN_IDENTIFIER), m_value(value) {}
+TokenIdentifier::TokenIdentifier(std::string &value): IToken(TokenType::TOKEN_IDENTIFIER), m_value(value){}
 
 std::string TokenIdentifier::to_string(){
     auto str = std::string();
@@ -12,6 +12,8 @@ std::string TokenIdentifier::to_string(){
     str.append("Identifier{");
     str.append(this->m_value);
     str.append("}");
+
+    return str;
 }
 
 //Token Symbol
@@ -38,6 +40,8 @@ std::string TokenSymbol::to_string(){
             break;
     }
     str.append("}");
+
+    return str;
 }
 
 //Token String
@@ -49,6 +53,8 @@ std::string TokenString::to_string(){
     str.append("String{");
     str.append(this->m_string);
     str.append("}");
+
+    return str;
 }
 
 //Token Number
@@ -60,6 +66,8 @@ std::string TokenNumber::to_string() {
     str.append("Number{");
     str.append(this->m_number);
     str.append("}");
+
+    return str;
 }
 
 //Token Keyword
@@ -270,4 +278,6 @@ std::string TokenKeyword::to_string(){
             break;
     }
     str.append("}");
+
+    return str;
 }

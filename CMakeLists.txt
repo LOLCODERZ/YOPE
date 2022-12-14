@@ -13,6 +13,7 @@ target_sources(
     src/token.cpp
     src/parser.cpp
     src/node.cpp
+    src/lexer.cpp
 )
 
 target_include_directories(${target} PRIVATE include/)

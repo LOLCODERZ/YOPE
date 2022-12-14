@@ -90,9 +90,11 @@ class IToken{
 public:
     TokenType m_type;
 
-    IToken(TokenType Type);
+    explicit IToken(TokenType Type);
 
     virtual std::string to_string() = 0;
+
+    virtual ~IToken() = default;
 };
 
 class TokenIdentifier: public IToken{
@@ -108,7 +110,7 @@ class TokenSymbol: public IToken{
 public:
     TokenSymbolT m_symbol;
 
-    TokenSymbol(TokenSymbolT symbol);
+    explicit TokenSymbol(TokenSymbolT symbol);
 
     std::string to_string() override;
 };
@@ -126,7 +128,7 @@ class TokenString: public IToken{
 public:
     std::string m_string;
 
-    TokenString(std::string& string);
+    explicit TokenString(std::string& string);
 
     std::string to_string() override;
 };
@@ -136,7 +138,7 @@ class TokenKeyword: public IToken{
 public:
     TokenKeywordT m_keyword;
 
-    TokenKeyword(TokenKeywordT keyword);
+    explicit TokenKeyword(TokenKeywordT keyword);
 
     std::string to_string() override;
 };
