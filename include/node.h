@@ -61,6 +61,15 @@ public:
     virtual std::string to_string() = 0;
 };
 
+class ValueNode : public INode {
+public:
+    ValueNode(ValueType type, std::string& value);
+    std::string to_string() override;
+
+    ValueType m_type;
+    std::string m_value;
+};
+
 class BinOpNode : public INode {
 public:
     BinOpNode(std::shared_ptr<INode>  lhs, OpType op, std::shared_ptr<INode>  rhs);
@@ -90,7 +99,7 @@ public:
 
 class FunDefNode : public INode {
 public:
-    FunDefNode(std::string name, ValueType return_type, std::vector<std::shared_ptr<INode>> params, std::shared_ptr<INode> body);
+    FunDefNode(std::string& name, ValueType return_type, std::vector<std::shared_ptr<INode>> params, std::shared_ptr<INode> body);
     std::string to_string() override;
 
     std::string m_name;
@@ -101,7 +110,7 @@ public:
 
 class FunCallNode : public INode {
 public:
-    FunCallNode(std::string name, std::vector<std::shared_ptr<INode>> params);
+    FunCallNode(std::string& name, std::vector<std::shared_ptr<INode>> params);
     std::string to_string() override;
 
     std::string m_name;
@@ -110,7 +119,7 @@ public:
 
 class VarDefNode : public INode {
 public:
-    VarDefNode(ValueType type, std::string name, std::shared_ptr<INode> value);
+    VarDefNode(ValueType type, std::string& name, std::shared_ptr<INode> value);
     std::string to_string() override;
 
     ValueType m_type;
@@ -120,14 +129,15 @@ public:
 
 class VarCallNode : public INode {
 public:
-    VarCallNode();
+    VarCallNode(std::string& name);
     std::string to_string() override;
 
     std::string m_name;
 };
 
 class VarAssNode : public INode {
-    VarAssNode();
+public:
+    VarAssNode(std::string& name, std::shared_ptr<INode> new_vaule);
     std::string to_string() override;
 
     std::string m_name;
@@ -135,30 +145,38 @@ class VarAssNode : public INode {
 };
 
 class ForLoopNode : public INode {
+public:
     ForLoopNode();
     std::string to_string() override;
 
+    std::vector<std::shared_ptr<INode>> m_body;
 };
 
 class WhileLoopNode : public INode {
-    WhileLoopNode();
+public:
+    WhileLoopNode(std::shared_ptr<INode> condition, std::vector<std::shared_ptr<INode>> m_body);
     std::string to_string() override;
 
+    std::shared_ptr<INode> m_condition;
+    std::vector<std::shared_ptr<INode>> m_body;
 };
 
 class IncludeNode : public INode {
-    IncludeNode();
+public:
+    IncludeNode(std::string& path);
     std::string to_string() override;
 
     std::string m_path;
 };
 
 class BreakNode : public INode {
+public:
     BreakNode();
     std::string to_string() override;
 };
 
 class ReturnNode : public INode {
+public:
     ReturnNode();
     std::string to_string() override;
 
@@ -166,13 +184,18 @@ class ReturnNode : public INode {
 };
 
 class InterruptNode : public INode {
+public:
     InterruptNode();
     std::string to_string() override;
 };
 
 class SwitchNode : public INode {
-    SwitchNode();
+public:
+    SwitchNode(std::shared_ptr<INode> condition, std::vector<std::shared_ptr<INode>> body);
     std::string to_string() override;
+
+    std::shared_ptr<INode> m_condition;
+    std::vector<std::shared_ptr<INode>> m_body;
 };
 
 
