@@ -12,8 +12,6 @@
 #include "token.h"
 #include <regex>
 
-std::regex r(R"(^^\s*[-+]?((\d+(\.\d+)?)|(\d+\.)|(\.\d+))(e[-+]?\d+)?\s*$)");
-
 enum TokenKeywordS{
     HAI,
     KTHX,
@@ -90,6 +88,7 @@ private:
 
     void advance();
 
+    std::shared_ptr<IToken> make_number();
     std::shared_ptr<IToken> make_identifier();
     std::shared_ptr<IToken> make_string();
 

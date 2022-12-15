@@ -1,12 +1,12 @@
 #include "token.h"
 
 // IToken
-IToken::IToken(TokenType type): m_type(type) {}
+IToken::IToken(TokenType type) : m_type(type) {}
 
 //Token Identifier
-TokenIdentifier::TokenIdentifier(std::string &value): IToken(TokenType::TOKEN_IDENTIFIER), m_value(value){}
+TokenIdentifier::TokenIdentifier(std::string &value) : IToken(TokenType::TOKEN_IDENTIFIER), m_value(value) {}
 
-std::string TokenIdentifier::to_string(){
+std::string TokenIdentifier::to_string() {
     auto str = std::string();
 
     str.append("Identifier{");
@@ -17,12 +17,12 @@ std::string TokenIdentifier::to_string(){
 }
 
 //Token Symbol
-TokenSymbol::TokenSymbol(TokenSymbolT symbol): IToken(TokenType::TOKEN_SYMBOL), m_symbol(symbol) {}
+TokenSymbol::TokenSymbol(TokenSymbolT symbol) : IToken(TokenType::TOKEN_SYMBOL), m_symbol(symbol) {}
 
-std::string TokenSymbol::to_string(){
+std::string TokenSymbol::to_string() {
     auto str = std::string();
     str.append("Symbol{");
-    switch(m_symbol){
+    switch (m_symbol) {
         case TokenSymbolT::TOKEN_COMMA:
             str.append("[,]");
             break;
@@ -45,9 +45,9 @@ std::string TokenSymbol::to_string(){
 }
 
 //Token String
-TokenString::TokenString(std::string &string): IToken(TokenType::TOKEN_STRING), m_string(string) {}
+TokenString::TokenString(std::string &string) : IToken(TokenType::TOKEN_STRING), m_string(string) {}
 
-std::string TokenString::to_string(){
+std::string TokenString::to_string() {
     auto str = std::string();
 
     str.append("String{");
@@ -58,7 +58,7 @@ std::string TokenString::to_string(){
 }
 
 //Token Number
-TokenNumber::TokenNumber(std::string &number): IToken(TokenType::TOKEN_NUMBER), m_number(number) {}
+TokenNumber::TokenNumber(std::string &number) : IToken(TokenType::TOKEN_NUMBER), m_number(number) {}
 
 std::string TokenNumber::to_string() {
     auto str = std::string();
@@ -71,13 +71,13 @@ std::string TokenNumber::to_string() {
 }
 
 //Token Keyword
-TokenKeyword::TokenKeyword(TokenKeywordT keyword): IToken (TokenType::TOKEN_KEYWORD), m_keyword(keyword) {}
+TokenKeyword::TokenKeyword(TokenKeywordT keyword) : IToken(TokenType::TOKEN_KEYWORD), m_keyword(keyword) {}
 
-std::string TokenKeyword::to_string(){
+std::string TokenKeyword::to_string() {
     auto str = std::string();
 
     str.append("Keyword{");
-    switch(m_keyword) {
+    switch (m_keyword) {
         case TOKEN_KEYWORD_HAI:
             str.append("HAI");
             break;

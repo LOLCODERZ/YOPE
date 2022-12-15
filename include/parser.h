@@ -6,14 +6,22 @@
 #define YOPE_PARSER_H
 
 #include "token.h"
+#include "node.h"
 #include <vector>
+#include <memory>
 
-class parser {
-    int index;
+class Parser {
+public:
+    std::vector<std::shared_ptr<IToken>> m_tokens;
+    uintptr_t m_index = 0;
 
-    //current()
-    //advance()
-    //parse()
+    explicit Parser(std::vector<std::shared_ptr<IToken>> tokens);
+    std::vector<std::shared_ptr<INode>> parse();
+private:
+    std::shared_ptr<IToken> current();
+    void advance();
+
+    std::shared_ptr<INode> parse_current();
 };
 
 

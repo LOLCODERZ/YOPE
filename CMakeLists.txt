@@ -14,6 +14,7 @@ target_sources(
     src/parser.cpp
     src/node.cpp
     src/lexer.cpp
+    src/generator.cpp
 )
 
 target_include_directories(${target} PRIVATE include/)

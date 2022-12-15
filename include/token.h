@@ -3,7 +3,7 @@
 
 #include <string>
 
-enum TokenType{
+enum TokenType {
     TOKEN_IDENTIFIER,
     TOKEN_KEYWORD,
     TOKEN_SYMBOL, // Question_mark, comma, single and double apostrophe
@@ -11,14 +11,14 @@ enum TokenType{
     TOKEN_STRING
 };
 
-enum TokenSymbolT{
+enum TokenSymbolT {
     TOKEN_QUESTION_MARK,
     TOKEN_COMMA,
     TOKEN_SINGLE_APOSTROPHE,
     TOKEN_DOUBLE_APOSTROPHE
 };
 
-enum TokenKeywordT{
+enum TokenKeywordT {
     TOKEN_KEYWORD_HAI = 0,
     TOKEN_KEYWORD_KTHX,
     TOKEN_KEYWORD_KTHXBYE,
@@ -86,7 +86,7 @@ enum TokenKeywordT{
     TOKEN_KEYWORD_MEBEE
 };
 
-class IToken{
+class IToken {
 public:
     TokenType m_type;
 
@@ -97,16 +97,16 @@ public:
     virtual ~IToken() = default;
 };
 
-class TokenIdentifier: public IToken{
+class TokenIdentifier : public IToken {
 public:
     std::string m_value;
 
-    TokenIdentifier(std::string& value);
+    TokenIdentifier(std::string &value);
 
     std::string to_string() override;
 };
 
-class TokenSymbol: public IToken{
+class TokenSymbol : public IToken {
 public:
     TokenSymbolT m_symbol;
 
@@ -115,26 +115,26 @@ public:
     std::string to_string() override;
 };
 
-class TokenNumber: public IToken{
+class TokenNumber : public IToken {
 public:
     std::string m_number;
 
-    TokenNumber(std::string& number);
+    TokenNumber(std::string &number);
 
     std::string to_string() override;
 };
 
-class TokenString: public IToken{
+class TokenString : public IToken {
 public:
     std::string m_string;
 
-    explicit TokenString(std::string& string);
+    explicit TokenString(std::string &string);
 
     std::string to_string() override;
 };
 
 
-class TokenKeyword: public IToken{
+class TokenKeyword : public IToken {
 public:
     TokenKeywordT m_keyword;
 
@@ -142,8 +142,6 @@ public:
 
     std::string to_string() override;
 };
-
-
 
 
 #endif //YOPE_TOKEN_H

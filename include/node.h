@@ -13,7 +13,7 @@ enum NodeType {
     VALUE, //store value type
     BIN_OP,
     UN_OP,
-    IF, // this includes else and else if's in a vector
+    IFNode, // this includes else and else if's in a vector
     FUN_DEF,
     FUN_CALL,
     VAR_DEF,
@@ -25,17 +25,18 @@ enum NodeType {
     BREAK,
     RETURN,
     INTERRUPT,
-    SWITCH
+    SWITCH,
+    VISIBLENode
 };
 
 enum OpType {
-    SUM,
+    SUMOp,
     MINUS,
     MULTIPLY,
     DIVIDE,
     MAX,
     MIN,
-    MOD,
+    MODOp,
     INCREMENT,
     DECREMENT,
     AND,
@@ -44,6 +45,8 @@ enum OpType {
     NOT,
     EQUAL
 };
+
+std::string op_type_to_string(OpType op);
 
 enum ValueType {
     NULLL,
@@ -54,11 +57,14 @@ enum ValueType {
     ARRAY
 };
 
+std::string value_type_to_string(ValueType value_type);
+
 class INode {
 public:
     NodeType m_type;
-    INode(NodeType type);
+    explicit INode(NodeType type);
     virtual std::string to_string() = 0;
+    virtual ~INode() = default;
 };
 
 class ValueNode : public INode {
@@ -137,7 +143,7 @@ public:
 
 class VarAssNode : public INode {
 public:
-    VarAssNode(std::string& name, std::shared_ptr<INode> new_vaule);
+    VarAssNode(std::string& name, std::shared_ptr<INode> new_value);
     std::string to_string() override;
 
     std::string m_name;
@@ -177,16 +183,24 @@ public:
 
 class ReturnNode : public INode {
 public:
-    ReturnNode();
+    ReturnNode(std::shared_ptr<INode> value);
     std::string to_string() override;
 
-    ValueType m_return_type;
+    std::shared_ptr<INode> m_value;
 };
 
 class InterruptNode : public INode {
 public:
     InterruptNode();
     std::string to_string() override;
+};
+
+class VisibleNode : public INode {
+public:
+    VisibleNode(std::string value);
+    std::string to_string() override;
+
+    std::string m_value;
 };
 
 class SwitchNode : public INode {
@@ -196,11 +210,6 @@ public:
 
     std::shared_ptr<INode> m_condition;
     std::vector<std::shared_ptr<INode>> m_body;
-};
-
-
-class node {
-
 };
 
 #endif //YOPE_NODE_H
